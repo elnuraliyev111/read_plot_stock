@@ -2,3 +2,4 @@ streamlit
 pandas
 yfinance
 cufflinks
+yfinance --upgrade --no-cache-dir
