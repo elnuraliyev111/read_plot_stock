@@ -27,16 +27,16 @@ def app():
     st.write('---')
 
     # Sidebar
-    st.sidebar.subheader('Query parameters')
-    start_date = st.sidebar.date_input("Start date", datetime.date(2010, 1, 1))
-    end_date = st.sidebar.date_input("End date", datetime.date(2022, 5, 31))
+    st.subheader('Query parameters')
+    start_date = st.date_input("Start date", datetime.date(2010, 1, 1))
+    end_date = st.date_input("End date", datetime.date(2022, 5, 31))
 
     # Retrieving tickers data
     ticker_list = pd.read_csv('https://raw.githubusercontent.com/dataprofessor/s-and-p-500-companies/master/data/constituents_symbols.txt', header = None)
-    firsttickerSymbol = st.sidebar.selectbox('First Stock', ticker_list, index = 197) # Select ticker symbol
+    firsttickerSymbol = st.selectbox('First Stock', ticker_list, index = 197) # Select ticker symbol
     firsttickerData = yf.Ticker(firsttickerSymbol) # Get ticker data
     firsttickerDf = firsttickerData.history(period='1d', start=start_date, end=end_date) #get the historical prices for this ticker
-    secondtickerSymbol = st.sidebar.selectbox('Second Stock', ticker_list, index = 198) # Select ticker symbol
+    secondtickerSymbol = st.selectbox('Second Stock', ticker_list, index = 198) # Select ticker symbol
     secondtickerData = yf.Ticker(secondtickerSymbol) # Get ticker data
     secondtickerDf = secondtickerData.history(period='1d', start=start_date, end=end_date) #get the historical prices for this ticker
 
