@@ -14,15 +14,10 @@ from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 
 def app():
-    st.title('Single Stock')
-
-    st.write('This is the `Model` page of the multi-page app.')
-
-    st.write('The model performance of the Iris dataset is presented below.')
 
     # App title
     st.markdown('''
-    # Stock Price App
+    # Single Stock Price 
     Shown are the stock price data for query companies!
     **Credits**
     - App built by Elnur Aliyev

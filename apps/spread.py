@@ -14,15 +14,10 @@ from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 
 def app():
-    st.title('Model')
-
-    st.write('This is the `Model` page of the multi-page app.')
-
-    st.write('The model performance of the Iris dataset is presented below.')
 
     # App title
     st.markdown('''
-    # Stock Price App
+    # Spread of Two Stocks App
     Shown are the stock price data for query companies!
     **Credits**
     - App built by Elnur Aliyev
@@ -37,32 +32,28 @@ def app():
 
     # Retrieving tickers data
     ticker_list = pd.read_csv('https://raw.githubusercontent.com/dataprofessor/s-and-p-500-companies/master/data/constituents_symbols.txt')
-    tickerSymbol = st.sidebar.selectbox('First Stock', ticker_list) # Select ticker symbol
-    tickerData = yf.Ticker(tickerSymbol) # Get ticker data
-    tickerDf = tickerData.history(period='1d', start=start_date, end=end_date) #get the historical prices for this ticker
-    second_leg = st.sidebar.selectbox('Second Stock', ticker_list) # Select ticker symbol
-
-
-    #tickerSymbol = 'GOOGL'
-
-    #tickerData = yf.Ticker(tickerSymbol)
-
-    #tickerDf = tickerData.history(period = '1d', start = '2010-5-31', end ='2020-5-31')
-
+    firsttickerSymbol = st.sidebar.selectbox('First Stock', ticker_list) # Select ticker symbol
+    firsttickerData = yf.Ticker(firsttickerSymbol) # Get ticker data
+    firsttickerDf = firsttickerData.history(period='1d', start=start_date, end=end_date) #get the historical prices for this ticker
+    secondtickerSymbol = st.sidebar.selectbox('Second Stock', ticker_list) # Select ticker symbol
+    secondtickerData = yf.Ticker(secondtickerSymbol) # Get ticker data
+    secondtickerDf = secondtickerData.history(period='1d', start=start_date, end=end_date) #get the historical prices for this ticker
 
 
     fig = make_subplots(rows=1, cols=2)
 
     fig.add_trace(
-        go.Scatter(y=tickerDf['Close']),
+        go.Scatter(x = firsttickerDf.index, y=firsttickerDf['Close'], name = firsttickerSymbol),
         row=1, col=1
     )
 
     fig.add_trace(
-        go.Scatter(y=tickerDf['Volume']),
+        go.Scatter(x = secondtickerDf.index, y=secondtickerDf['Close'], name = secondtickerSymbol),
         row=1, col=2
     )
 
-    fig.update_layout(height=600, width=800, title_text="Close Price and Volume")
+    fig.update_layout(height=600, width=800, title_text="Close Price for " + firsttickerSymbol + " and " + secondtickerSymbol)
 
     st.plotly_chart(fig)
+    #st.write(secondtickerDf)
+    print(secondtickerDf)

@@ -5,9 +5,7 @@ from apps import data, model, single_stock, spread # import your app modules her
 app = MultiApp()
 
 st.markdown("""
-# Multi-Page App
-
-This multi-page app is using the [streamlit-multiapps]
+# This App can visualize Single Stock or a Spread between Two Stocks
 """)
 
 # Add all your application here
