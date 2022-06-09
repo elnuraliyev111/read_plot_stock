@@ -41,6 +41,8 @@ def app():
     secondtickerDf = secondtickerData.history(period='1d', start=start_date, end=end_date) #get the historical prices for this ticker
 
 
+    spreadDf = firsttickerDf - secondtickerDf
+
 #    fig = make_subplots(rows=1, cols=2)
 #    fig.add_trace(
 #        go.Scatter(x = firsttickerDf.index, y=firsttickerDf['Close'], name = firsttickerSymbol),
@@ -57,9 +59,13 @@ def app():
 #    st.plotly_chart(fig)
     #st.write(secondtickerDf)
     
+    trace1 = go.Figure()
+    trace1.add_trace(go.Scatter(x = spreadDf.index, y=spreadDf['Close'], name = firsttickerSymbol + "/" + secondtickerSymbol))
+    st.plotly_chart(trace1)
+
     trace2 = go.Figure()
     trace2.add_trace(go.Scatter(x = firsttickerDf.index, y=firsttickerDf['Close'], name = firsttickerSymbol))
     trace2.add_trace(go.Scatter(x = secondtickerDf.index, y=secondtickerDf['Close'], name = secondtickerSymbol))
-
     st.plotly_chart(trace2)
-    #print(ticker_list)
+
+#    print(spreadDf)
