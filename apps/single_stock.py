@@ -14,7 +14,7 @@ from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 
 def app():
-    st.title('Model')
+    st.title('Single Stock')
 
     st.write('This is the `Model` page of the multi-page app.')
 
